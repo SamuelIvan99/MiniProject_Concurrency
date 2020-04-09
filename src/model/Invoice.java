@@ -7,12 +7,14 @@ public class Invoice {
     private String title;
     private String description;
     private Date date;
+    private boolean resolved;
     private String solution;
 
     public Invoice(String title, String description, String solution){
         this.title = title;
         this.description = description;
         this.solution = solution;
+        resolved = false;
     }
 
     public int getInvoiceID() {
