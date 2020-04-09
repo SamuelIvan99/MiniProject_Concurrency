@@ -25,7 +25,7 @@ class DatabaseConnectionTest {
 
     @AfterEach
     void tearDown() {
-        connection = null;
         DatabaseConnection.disconnect();
+        connection = null;
     }
 }

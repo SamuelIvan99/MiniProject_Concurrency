@@ -54,7 +54,6 @@ public class DatabaseConnection {
             res = s.executeUpdate(sql);
         } catch (SQLException e) {
             throw new DataAccessException("Could not execute update", e);
-
         }
         return res;
     }
