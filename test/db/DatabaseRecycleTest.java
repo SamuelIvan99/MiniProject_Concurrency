@@ -79,12 +79,8 @@ public class DatabaseRecycleTest {
 
     @Test
     void recycleDatabaseShouldHaveDefaultColumns() {
-        try {
-            recycle.recycleDatabase();
-            cleanDatabaseShouldBeEmpty();
-        } catch (SQLException e) {
-            fail(e);
-        }
+        recycle.recycleDatabase();
+        cleanDatabaseShouldBeEmpty();
     }
 
     @AfterEach

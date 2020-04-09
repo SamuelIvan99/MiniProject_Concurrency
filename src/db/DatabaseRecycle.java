@@ -97,8 +97,12 @@ public class DatabaseRecycle {
         stmt.close();
     }
 
-    public void recycleDatabase() throws SQLException {
-        cleanDatabase();
-        restoreDatabase();
+    public void recycleDatabase() {
+        try {
+            cleanDatabase();
+            restoreDatabase();
+        } catch (SQLException e) {
+            System.out.println("Failed to recycle the database.");
+        }
     }
 }
