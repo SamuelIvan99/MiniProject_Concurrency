@@ -3,7 +3,6 @@ package db;
 import java.sql.*;
 
 /**
- *
  * @author Group-One
  */
 public class DatabaseConnection {
