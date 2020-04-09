@@ -56,4 +56,12 @@ public class Invoice {
     public void setSolution(String solution) {
         this.solution = solution;
     }
+
+    public boolean isResolved() {
+        return resolved;
+    }
+
+    public void setResolved(boolean resolved) {
+        this.resolved = resolved;
+    }
 }

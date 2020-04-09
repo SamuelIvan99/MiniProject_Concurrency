@@ -6,15 +6,15 @@ import java.util.List;
 
 public interface InvoiceIF {
 
-    boolean insertInvoice(Invoice invoice);
+    boolean insertInvoice(Invoice invoice) throws DataAccessException;
 
-    Invoice findInvoiceByTitle(String title, boolean fullAssociation);
+    List<Invoice> findInvoiceByTitle(String title, boolean fullAssociation) throws DataAccessException;
 
-    Invoice findInvoiceByID(int id, boolean fullAssociation);
+    Invoice findInvoiceByID(int id, boolean fullAssociation) throws DataAccessException;
 
-    Invoice updateInvoice(Invoice invoice);
+    boolean updateInvoice(Invoice invoice) throws DataAccessException;
 
-    boolean deleteInvoice(int id);
+    boolean deleteInvoice(int id) throws DataAccessException;
 
-    List<Invoice> getAllInvoices();
+    List<Invoice> getAllInvoices(boolean fullAssociation) throws DataAccessException;
 }
