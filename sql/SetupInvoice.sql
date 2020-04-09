@@ -1,6 +1,4 @@
 USE dmai0919_1081509
-GO
-
 CREATE TABLE Invoice
 (
     InvoiceID SMALLINT IDENTITY(1, 1),
