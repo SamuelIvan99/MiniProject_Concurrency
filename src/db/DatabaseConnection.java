@@ -12,8 +12,7 @@ public class DatabaseConnection {
     private static final String LOGIN = "dmai0919_1081509";
     private static final String PASSSWORD = "Password1!";
 
-    private static final String CONNECTION_STR = "jdbc:sqlserver://"
-            + SERVER_NAME + ":1433;databaseName=" + DB_NAME;
+    private static final String CONNECTION_STR = "jdbc:sqlserver://" + SERVER_NAME + ":1433;databaseName=" + DB_NAME;
 
     private static DatabaseConnection instance;
     private static Connection connection;
