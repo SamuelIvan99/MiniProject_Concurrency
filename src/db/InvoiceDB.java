@@ -39,5 +39,4 @@ public class InvoiceDB implements InvoiceIF {
     public Object buildObject(ResultSet resultSet, boolean fullAssociation) {
         return null;
     }
-
 }
