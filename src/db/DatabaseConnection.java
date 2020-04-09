@@ -44,6 +44,10 @@ public class DatabaseConnection {
         return instance;
     }
 
+    public static Connection getConnection(){
+        return connection;
+    }
+
     public int executeUpdate(String sql) throws DataAccessException {
         int res = -1;
         try (Statement s = connection.createStatement()) {
