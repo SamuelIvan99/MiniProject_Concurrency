@@ -92,7 +92,7 @@ public class InvoiceDB implements InvoiceIF {
     @Override
     public List<Invoice> getAllInvoices(boolean fullAssociation) throws DataAccessException {
         ArrayList<Invoice> invoices = new ArrayList<>();
-        String SELECT_INVOICES = "SELECT * FROM Supplier";
+        String SELECT_INVOICES = "SELECT * FROM Invoice";
 
         try {
             ResultSet rs = instance.getConnection().createStatement().executeQuery(SELECT_INVOICES);
