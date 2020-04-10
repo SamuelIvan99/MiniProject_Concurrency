@@ -1,4 +1,0 @@
-USE dmai0919_1081509
-GO
-
-DROP TABLE Invoice

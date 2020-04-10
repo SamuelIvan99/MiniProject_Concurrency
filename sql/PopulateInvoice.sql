@@ -1,6 +1,4 @@
 USE dmai0919_1081509
-GO
-
 INSERT INTO Invoice
     (Title, Description, Date, Solution)
 VALUES

@@ -45,6 +45,7 @@ public class InvoiceDB implements InvoiceIF {
 
     @Override
     public List<Invoice> findInvoiceByTitle(String title, boolean fullAssociation) throws DataAccessException {
+        // TODO there is a problem with this find?? Title type and ps.setString are not compatible - possible error
         ArrayList<Invoice> invoices = new ArrayList<>();
         String SELECT_INVOICE = String.format("SELECT * " +
                 "FROM Invoice " +
@@ -91,7 +92,7 @@ public class InvoiceDB implements InvoiceIF {
     @Override
     public List<Invoice> getAllInvoices(boolean fullAssociation) throws DataAccessException {
         ArrayList<Invoice> invoices = new ArrayList<>();
-        String SELECT_INVOICES = "SELECT * FROM Supplier";
+        String SELECT_INVOICES = "SELECT * FROM Invoice";
 
         try {
             ResultSet rs = instance.getConnection().createStatement().executeQuery(SELECT_INVOICES);
