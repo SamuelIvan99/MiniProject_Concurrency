@@ -8,4 +8,10 @@ CREATE TABLE Invoice
     Solution TEXT NULL,
 
     CONSTRAINT PK_Invoice PRIMARY KEY (InvoiceID)
+);
+
+CREATE TABLE TablesVersionNo
+(
+    TableName varchar(60) PRIMARY KEY,
+    VersionNo INT DEFAULT 0
 )
