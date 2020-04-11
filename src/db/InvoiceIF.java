@@ -12,6 +12,8 @@ public interface InvoiceIF {
 
     Invoice findInvoiceByID(int id, boolean fullAssociation) throws DataAccessException;
 
+    boolean findEquals (Invoice invoice) throws DataAccessException;
+
     boolean updateInvoice(Invoice invoice) throws DataAccessException;
 
     boolean deleteInvoice(int id) throws DataAccessException;

@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class InvoiceDB implements InvoiceIF {
@@ -103,6 +104,20 @@ public class InvoiceDB implements InvoiceIF {
             throw new DataAccessException("Error while selecting invoices", ex);
         }
         return invoices;
+    }
+
+    public boolean findEquals(Invoice invoice) throws DataAccessException {
+        ArrayList<Invoice> invoices =  new ArrayList<>(findInvoiceByTitle(invoice.getTitle(), false));
+        boolean copyFound = false;
+
+        Iterator<Invoice> it = invoices.iterator();
+        while (it.hasNext() && !copyFound){
+            Invoice current = it.next();
+            if (current.equals(invoice))
+                copyFound = true;
+        }
+
+        return copyFound;
     }
 
     public Invoice buildObject(ResultSet resultSet, boolean fullAssociation) throws DataAccessException {
