@@ -1,3 +1,8 @@
+/**
+ * @author samuel
+ */
+
+
 package db;
 
 import model.Invoice;

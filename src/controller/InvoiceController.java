@@ -1,3 +1,7 @@
+/**
+ * @author samuel
+ */
+
 package controller;
 
 import db.DataAccessException;
@@ -5,6 +9,7 @@ import db.InvoiceDB;
 import db.InvoiceIF;
 import model.Invoice;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,7 +37,7 @@ public class InvoiceController {
         return invoiceDB.findInvoiceByTitle(title, fullAssociation);
     }
 
-    public boolean updateInvoice(Invoice invoiceToUpdate, String newTitle, String newDescription, Date newDate, String newSolution, boolean resolved) throws DataAccessException {
+    public boolean updateInvoice(Invoice invoiceToUpdate, String newTitle, String newDescription, LocalDate newDate, String newSolution, boolean resolved) throws DataAccessException {
         Invoice invoice = new Invoice(newTitle, newDescription, newSolution);
         invoice.setResolved(resolved);
 
