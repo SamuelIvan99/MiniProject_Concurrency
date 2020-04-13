@@ -1,13 +1,27 @@
 package gui;
 
+import controller.InvoiceController;
+import db.DataAccessException;
+import model.Invoice;
+
 import javax.swing.*;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author dragon
  */
 public class InvoiceGui extends JFrame {
 
+    private InvoiceController invoiceController;
+    private List<Invoice> currentInvoices;
+    private Invoice clickedInvoice;
+
     public InvoiceGui() {
+        invoiceController = new InvoiceController();
         initComponents();
     }
 
@@ -15,109 +29,35 @@ public class InvoiceGui extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new JTextField();
-        jScrollPane1 = new JScrollPane();
+        invoicesScrollPane = new JScrollPane();
         invoicesPanel = new JPanel();
-        jLabel1 = new JLabel();
-        jLabel2 = new JLabel();
-        jLabel3 = new JLabel();
-        jLabel4 = new JLabel();
-        jLabel5 = new JLabel();
-        jLabel6 = new JLabel();
-        jScrollPane2 = new JScrollPane();
-        jPanel3 = new JPanel();
-        jScrollPane4 = new JScrollPane();
-        jEditorPane2 = new JEditorPane();
-        jScrollPane5 = new JScrollPane();
-        jEditorPane3 = new JEditorPane();
-        jScrollPane6 = new JScrollPane();
-        jEditorPane4 = new JEditorPane();
+        textsScrollPane = new JScrollPane();
+        textsPanel = new JPanel();
+        solutionScrollPane = new JScrollPane();
+        solutionEditor = new JEditorPane();
+        titleScrollPane = new JScrollPane();
+        titleEditor = new JEditorPane();
+        descriptScrollPane = new JScrollPane();
+        descriptEditor = new JEditorPane();
         commitChanges = new JButton();
 
-        jTextField1.setText("The solution is to take the fosset and some hot glue gun and then what you need to do is to ...");
+        //jTextField1.setText("The solution is to take the fosset and some hot glue gun and then what you need to do is to ...");
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        jScrollPane1.setForeground(new java.awt.Color(182, 182, 182));
-        jScrollPane1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        invoicesScrollPane.setForeground(new java.awt.Color(182, 182, 182));
+        invoicesScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        jLabel1.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(58, 58, 58));
-        jLabel1.setText("<html>ID: 0 \"My Sink is broken pls halp\"<br>23.05.2020 23::23::23<br>\"Hello, this is Nicoleta and I....\"</html>");
-        jLabel1.setVerticalAlignment(SwingConstants.TOP);
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                invoiceMouseClicked(evt);
-            }
-        });
+        invoicesScrollPane.setViewportView(invoicesPanel);
 
-        jLabel2.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(58, 58, 58));
-        jLabel2.setText("<html>ID: 0 \"My Sink is broken pls halp\"<br>23.05.2020 23::23::23<br>\"Hello, this is Nicoleta and I....\"</html>");
-        jLabel2.setVerticalAlignment(SwingConstants.TOP);
+        textsScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        textsScrollPane.setToolTipText("");
 
-        jLabel3.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(58, 58, 58));
-        jLabel3.setText("<html>ID: 0 \"My Sink is broken pls halp\"<br>23.05.2020 23::23::23<br>\"Hello, this is Nicoleta and I....\"</html>");
-        jLabel3.setVerticalAlignment(SwingConstants.TOP);
+        solutionScrollPane.setViewportView(solutionEditor);
 
-        jLabel4.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(58, 58, 58));
-        jLabel4.setText("<html>ID: 0 \"My Sink is broken pls halp\"<br>23.05.2020 23::23::23<br>\"Hello, this is Nicoleta and I....\"</html>");
-        jLabel4.setVerticalAlignment(SwingConstants.TOP);
+        titleScrollPane.setViewportView(titleEditor);
 
-        jLabel5.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(58, 58, 58));
-        jLabel5.setText("<html>ID: 0 \"My Sink is broken pls halp\"<br>23.05.2020 23::23::23<br>\"Hello, this is Nicoleta and I....\"</html>");
-        jLabel5.setVerticalAlignment(SwingConstants.TOP);
-
-        jLabel6.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(58, 58, 58));
-        jLabel6.setText("<html>ID: 0 \"My Sink is broken pls halp\"<br>23.05.2020 23::23::23<br>\"Hello, this is Nicoleta and I....\"</html>");
-
-        GroupLayout jPanel2Layout = new GroupLayout(invoicesPanel);
-        invoicesPanel.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-                jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-                jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel4, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel5, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jScrollPane1.setViewportView(invoicesPanel);
-
-        jScrollPane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane2.setToolTipText("");
-
-        jScrollPane4.setViewportView(jEditorPane2);
-
-        jScrollPane5.setViewportView(jEditorPane3);
-
-        jScrollPane6.setViewportView(jEditorPane4);
+        descriptScrollPane.setViewportView(descriptEditor);
 
         commitChanges.setBackground(new java.awt.Color(2, 180, 41));
         commitChanges.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
@@ -129,16 +69,16 @@ public class InvoiceGui extends JFrame {
             }
         });
 
-        GroupLayout jPanel3Layout = new GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
+        GroupLayout jPanel3Layout = new GroupLayout(textsPanel);
+        textsPanel.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
                 jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jScrollPane5, GroupLayout.DEFAULT_SIZE, 893, Short.MAX_VALUE)
-                                        .addComponent(jScrollPane6, GroupLayout.DEFAULT_SIZE, 893, Short.MAX_VALUE)
-                                        .addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                        .addComponent(titleScrollPane, GroupLayout.DEFAULT_SIZE, 893, Short.MAX_VALUE)
+                                        .addComponent(descriptScrollPane, GroupLayout.DEFAULT_SIZE, 893, Short.MAX_VALUE)
+                                        .addComponent(solutionScrollPane, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                         .addComponent(commitChanges, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addContainerGap(2051, Short.MAX_VALUE))
         );
@@ -146,68 +86,98 @@ public class InvoiceGui extends JFrame {
                 jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jScrollPane5, GroupLayout.PREFERRED_SIZE, 227, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(titleScrollPane, GroupLayout.PREFERRED_SIZE, 227, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane6, GroupLayout.PREFERRED_SIZE, 227, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(descriptScrollPane, GroupLayout.PREFERRED_SIZE, 227, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, 227, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(solutionScrollPane, GroupLayout.PREFERRED_SIZE, 227, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(commitChanges, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(89, Short.MAX_VALUE))
         );
 
-        jScrollPane2.setViewportView(jPanel3);
+        textsScrollPane.setViewportView(textsPanel);
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(invoicesScrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
+                                .addComponent(textsScrollPane, GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
                                 .addContainerGap())
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
+                        .addComponent(invoicesScrollPane, GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(textsScrollPane, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                 .addContainerGap())
         );
+        pullAndRefresh();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void commitChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commitChangesActionPerformed
-        JLabel[] labels = new JLabel[6];
+        String title = titleEditor.getText();
+        String descript = descriptEditor.getText();
+        String solution = solutionEditor.getText();
+        LocalDate date = LocalDate.now();
 
-        labels[0] = createInvoice(new String[]{"0", "Title0", "23.05.2020 10:23:09", "This is a sample description, if it's too long then it's going to be trimmed.", "Just a sample solution here."});
-        labels[1] = createInvoice(new String[]{"1", "Title1", "23.05.2020 10:23:09", "This is a sample description, if it's too long then it's going to be trimmed.", "Just a sample solution here."});
-        labels[2] = createInvoice(new String[]{"2", "Title2", "23.05.2020 10:23:09", "This is a sample description, if it's too long then it's going to be trimmed.", "Just a sample solution here."});
-        labels[3] = createInvoice(new String[]{"3", "Title3", "23.05.2020 10:23:09", "This is a sample description, if it's too long then it's going to be trimmed.", "Just a sample solution here."});
-        labels[4] = createInvoice(new String[]{"4", "Title4", "23.05.2020 10:23:09", "This is a sample description, if it's too long then it's going to be trimmed.", "Just a sample solution here."});
-        labels[5] = createInvoice(new String[]{"5", "Title5", "23.05.2020 10:23:09", "This is a sample description, if it's too long then it's going to be trimmed.", "Just a sample solution here."});
-
-        resetInvoices(labels);
+        try {
+            invoiceController.updateInvoice(clickedInvoice, title, descript, null, solution, true);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_commitChangesActionPerformed
 
     private void invoiceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        System.out.print("HEllo Boy!");
+        String evtText = evt.toString();
+        int pos = evt.getComponent().getY();
+        int tempID = 1;
+        while (pos >= 133) {
+            pos -= 133;
+            tempID++;
+        }
+
+        final int ID = tempID;
+
+        clickedInvoice = currentInvoices.stream().filter(x -> x.getInvoiceID() == ID).findFirst().get();
+        titleEditor.setText(clickedInvoice.getTitle());
+        descriptEditor.setText(clickedInvoice.getDescription());
+        solutionEditor.setText(clickedInvoice.getSolution());
+
     }//GEN-LAST:event_jLabel1MouseClicked
 
-    private JLabel createInvoice(String[] data) {
-        String ID = data[0];
-        String title = data[1];
-        String date = data[2];
-        String descript = (data[3].length() > 30) ? (data[3].substring(0, 27) + " ...") : (data[3]);
-        String solution = (data[4].length() > 30) ? (data[4].substring(0, 27) + " ...") : (data[4]);
+    public void pullAndRefresh() {
+        try {
+            currentInvoices = invoiceController.getAllInvoices(false);
+            JLabel[] invoiceLabels = new JLabel[currentInvoices.size()];
 
+            for (int i = 0; i < currentInvoices.size(); i++) {
+                invoiceLabels[i] = createInvoice(currentInvoices.get(i));
+            }
+            refreshInvoicesPanel(invoiceLabels);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private JLabel createInvoice(Invoice data) {
+        String ID = Integer.toString(data.getInvoiceID());
+        String title = data.getTitle();
+        String date = "23.05.2000 23:23";//data.getDate().toString();
+        String descript = data.getDescription();
+        String solution = data.getSolution();
+        String descriptFormatted = (descript.length() > 30) ? (descript.substring(0, 27) + " ...") : (descript);
+        String solutionFormatted = (solution.length() > 30) ? (solution.substring(0, 27) + " ...") : (solution);
 
         JLabel newInvoice = new JLabel();
 
-        String invoiceFormatted = String.format("<html>ID: %s \"%s\"<br>%s<br>%s<br>%s</html>", ID, title, date, descript, solution);
+        String invoiceFormatted = String.format("<html>ID: %s \"%s\"<br>%s<br>%s<br>%s</html>", ID, title, date, descriptFormatted, solutionFormatted);
 
         newInvoice.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         newInvoice.setForeground(new java.awt.Color(58, 58, 58));
@@ -221,7 +191,7 @@ public class InvoiceGui extends JFrame {
         return newInvoice;
     }
 
-    private void resetInvoices(JLabel[] invoices) {
+    private void refreshInvoicesPanel(JLabel[] invoices) {
         GroupLayout jPanelLayout = new GroupLayout(invoicesPanel);
         invoicesPanel.setLayout(jPanelLayout);
         invoicesPanel.removeAll();
@@ -254,7 +224,6 @@ public class InvoiceGui extends JFrame {
         jPanelLayout.setVerticalGroup(parallelGroupV);
     }
 
-
     public static void main(String args[]) {
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -275,25 +244,17 @@ public class InvoiceGui extends JFrame {
         });
     }
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton commitChanges;
-    private JEditorPane jEditorPane2;
-    private JEditorPane jEditorPane3;
-    private JEditorPane jEditorPane4;
-    private JLabel jLabel1;
-    private JLabel jLabel2;
-    private JLabel jLabel3;
-    private JLabel jLabel4;
-    private JLabel jLabel5;
-    private JLabel jLabel6;
+    private JEditorPane solutionEditor;
+    private JEditorPane titleEditor;
+    private JEditorPane descriptEditor;
     private JPanel invoicesPanel;
-    private JPanel jPanel3;
-    private JScrollPane jScrollPane1;
-    private JScrollPane jScrollPane2;
-    private JScrollPane jScrollPane4;
-    private JScrollPane jScrollPane5;
-    private JScrollPane jScrollPane6;
-    private JTextField jTextField1;
+    private JPanel textsPanel;
+    private JScrollPane invoicesScrollPane;
+    private JScrollPane textsScrollPane;
+    private JScrollPane solutionScrollPane;
+    private JScrollPane titleScrollPane;
+    private JScrollPane descriptScrollPane;
     // End of variables declaration//GEN-END:variables
 }

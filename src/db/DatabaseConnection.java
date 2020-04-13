@@ -20,7 +20,8 @@ public class DatabaseConnection {
 
     public static Connection connect() {
         try {
-            connection = DriverManager.getConnection(CONNECTION_STR, LOGIN, PASSSWORD);
+            if (connection == null)
+                connection = DriverManager.getConnection(CONNECTION_STR, LOGIN, PASSSWORD);
         } catch (SQLException ex) {
             System.err.println("Could not connect to " + DB_NAME + " database.");
             System.err.print(ex);
@@ -44,7 +45,7 @@ public class DatabaseConnection {
         return instance;
     }
 
-    public static Connection getConnection(){
+    public static Connection getConnection() {
         return connection;
     }
 

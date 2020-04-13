@@ -13,6 +13,7 @@ public class InvoiceDB implements InvoiceIF {
     private final DatabaseConnection instance;
 
     public InvoiceDB() {
+        DatabaseConnection.connect();
         instance = DatabaseConnection.getInstance();
     }
 
@@ -107,11 +108,11 @@ public class InvoiceDB implements InvoiceIF {
     }
 
     public boolean findEquals(Invoice invoice) throws DataAccessException {
-        ArrayList<Invoice> invoices =  new ArrayList<>(findInvoiceByTitle(invoice.getTitle(), false));
+        ArrayList<Invoice> invoices = new ArrayList<>(findInvoiceByTitle(invoice.getTitle(), false));
         boolean copyFound = false;
 
         Iterator<Invoice> it = invoices.iterator();
-        while (it.hasNext() && !copyFound){
+        while (it.hasNext() && !copyFound) {
             Invoice current = it.next();
             if (current.equals(invoice))
                 copyFound = true;
