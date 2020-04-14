@@ -4,3 +4,5 @@ out/
 main/
 MiniProject_Concurrency.iml
 .form
+.project
+.classpath
