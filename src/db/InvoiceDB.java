@@ -110,6 +110,29 @@ public class InvoiceDB implements InvoiceIF {
         }
         return invoices;
     }
+    
+    public void updateVersionNo(int versionNo) throws DataAccessException {
+    	String UPDATE_VERSION = String.format("UPDATE TablesVersionNo SET VersionNo = %d WHERE TableName = '%s'", versionNo, "InvoiceTable");
+    	try {
+    		instance.executeUpdate(UPDATE_VERSION);
+    	} catch (DataAccessException e) {
+    		 throw new DataAccessException("Error while trying to update version number", e);
+		}
+    }
+    
+    public int getVersionNo() throws DataAccessException {
+    	String SELECT_VERSION = "SELECT * FROM TablesVersionNo WHERE TableName = 'InvoiceTable'";
+    	int versionNo = -1;
+    	
+    	try {
+    		ResultSet rs = instance.getConnection().createStatement().executeQuery(SELECT_VERSION);
+    		versionNo = rs.getInt("VersionNo");
+    	} catch (SQLException e) {
+   		 throw new DataAccessException("Error while trying to get version number", e);
+    	}
+    	
+    	return versionNo;
+    }
 
     public boolean findEquals(Invoice invoice) throws DataAccessException {
         ArrayList<Invoice> invoices = new ArrayList<>(findInvoiceByTitle(invoice.getTitle(), false));

@@ -25,7 +25,8 @@ public class InvoiceController {
     public boolean createInvoice(Invoice invoice) throws DataAccessException {
         if(invoiceDB.findEquals(invoice))
             throw new OperationException("Invoice with these attributes already exists.");
-
+        
+        
         return invoiceDB.insertInvoice(invoice);
     }
 
@@ -64,5 +65,17 @@ public class InvoiceController {
 
     public List<Invoice> getAllInvoices(boolean fullAssociation) throws DataAccessException {
         return new ArrayList<>(invoiceDB.getAllInvoices(fullAssociation));
+    }
+    
+    public void updateVersionNo(int newVersion) throws DataAccessException {
+    	invoiceDB.updateVersionNo(newVersion);
+    }
+    
+    public int getVersion() throws DataAccessException {
+    	return invoiceDB.getVersionNo();
+	}
+    
+    public boolean isUpToDate(int version) throws DataAccessException {
+    	return invoiceDB.getVersionNo() == version;
     }
 }
