@@ -14,8 +14,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import com.sun.org.apache.xerces.internal.util.TeeXMLDocumentFilterImpl;
 
 import controller.InvoiceController;
 import db.DataAccessException;
@@ -30,6 +34,15 @@ public class InvoiceMenu extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable invoicesTable;
+	private JLabel lblVersionNo;
+	private JLabel lblID;
+	private JLabel lblTitle;
+	private JLabel lblDescription;
+	private JLabel lblSolution;
+	
+	private JTextField textFieldTitle;
+	private JTextArea textFieldDescription;
+	private JTextArea textFieldSolution;
 	
 	private InvoiceController invoiceController;
 	private DefaultTableModel tableModelInvoice;
@@ -81,19 +94,52 @@ public class InvoiceMenu extends JFrame {
 		setBounds(100, 100, 700, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
 		initDetailsPanel();
+		initInvoiceTable();
 	}
 	
 	private void initDetailsPanel() {
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 10, 670, 50);
-		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 5));
+		panel.setBounds(5, 5, 675, 150);
+		panel.setLayout(null);
 		// panel.setBorder(BorderFactory.createLineBorder(Color.black));
+		
+		lblID = new JLabel("Invoice ID: ");
+		lblID.setBounds(15, 15, 100, 20);
+		lblID.setFont(new Font("Ubuntu", Font.PLAIN, 13));
+		panel.add(lblID);
+		
+		lblTitle = new JLabel("Title: ");
+		lblTitle.setBounds(150, 15, 100, 20);
+		lblTitle.setFont(new Font("Ubuntu", Font.PLAIN, 13));
+		panel.add(lblTitle);
+		
+		textFieldTitle = new JTextField();
+		textFieldTitle.setBounds(150, 50, 100, 50);
+		panel.add(textFieldTitle);
+		
+		lblDescription = new JLabel("Description: ");
+		lblDescription.setBounds(300, 15, 100, 20);
+		lblDescription.setFont(new Font("Ubuntu", Font.PLAIN, 13));
+		panel.add(lblDescription);
+		
+		textFieldDescription = new JTextArea();
+		textFieldDescription.setBounds(300, 50, 125, 75);
+		panel.add(textFieldDescription);
+		
+		lblSolution = new JLabel("Solution: ");
+		lblSolution.setBounds(450, 15, 100, 20);
+		lblSolution.setFont(new Font("Ubuntu", Font.PLAIN, 13));
+		panel.add(lblSolution);
+		
+		textFieldSolution = new JTextArea();
+		textFieldSolution.setBounds(450, 50, 125, 75);
+		panel.add(textFieldSolution);
 
 		JButton btnCreate = new JButton("Create");
+		btnCreate.setBounds(595, 15, 75, 25);
 		btnCreate.addActionListener(new ActionListener() {
 
 			@Override
@@ -105,6 +151,7 @@ public class InvoiceMenu extends JFrame {
 		panel.add(btnCreate);
 
 		JButton btnUpdate = new JButton("Update");
+		btnUpdate.setBounds(595, 55, 75, 25);
 		btnUpdate.addActionListener(new ActionListener() {
 
 			@Override
@@ -117,6 +164,7 @@ public class InvoiceMenu extends JFrame {
 
 
 		JButton btnDelete = new JButton("Delete");
+		btnDelete.setBounds(595, 95, 75, 25);
 		btnDelete.addActionListener(new ActionListener() {
 
 			@Override
@@ -124,19 +172,21 @@ public class InvoiceMenu extends JFrame {
 				deleteInvoice();
 			}
 		});
+		contentPane.setLayout(null);
 		btnDelete.setFont(new Font("Ubuntu", Font.PLAIN, 12));
 		panel.add(btnDelete);
-		JLabel lblFirstName = new JLabel("Version No.:" + tableVersion);
-		lblFirstName.setFont(new Font("Ubuntu", Font.PLAIN, 13));
-		contentPane.add(panel, BorderLayout.NORTH);
+		lblVersionNo = new JLabel("Version No.:" + tableVersion);
+		lblVersionNo.setBounds(15, 50, 100, 20);
+		lblVersionNo.setFont(new Font("Ubuntu", Font.PLAIN, 13));
+		panel.add(lblVersionNo);
 		
-		initInvoiceTable();
+		contentPane.add(panel);
 	}
 	
 	private void initInvoiceTable() {
 		JScrollPane scrollPane = new JScrollPane(invoicesTable);
-		scrollPane.setBounds(10, 60, 670, 350);
-		contentPane.add(scrollPane, BorderLayout.CENTER);
+		scrollPane.setBounds(5, 155, 675, 200);
+		contentPane.add(scrollPane);
 		invoicesTable.getTableHeader().setReorderingAllowed(false);
 		
 		clearInvoiceTable();
