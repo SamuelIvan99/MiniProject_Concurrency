@@ -1,3 +1,7 @@
+/**
+ * @author samuel
+ */
+
 package db;
 
 import model.Invoice;
@@ -11,6 +15,12 @@ public interface InvoiceIF {
     List<Invoice> findInvoiceByTitle(String title, boolean fullAssociation) throws DataAccessException;
 
     Invoice findInvoiceByID(int id, boolean fullAssociation) throws DataAccessException;
+
+    boolean findEquals (Invoice invoice) throws DataAccessException;
+    
+    void updateVersionNo(int versionNo) throws DataAccessException;
+    
+    int getVersionNo() throws DataAccessException;
 
     boolean updateInvoice(Invoice invoice) throws DataAccessException;
 

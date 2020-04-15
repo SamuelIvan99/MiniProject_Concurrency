@@ -1,3 +1,7 @@
+/**
+ * @author samuel
+ */
+
 package db;
 
 import model.Invoice;
@@ -6,12 +10,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class InvoiceDB implements InvoiceIF {
     private final DatabaseConnection instance;
 
     public InvoiceDB() {
+        DatabaseConnection.connect();
         instance = DatabaseConnection.getInstance();
     }
 
@@ -45,7 +51,6 @@ public class InvoiceDB implements InvoiceIF {
 
     @Override
     public List<Invoice> findInvoiceByTitle(String title, boolean fullAssociation) throws DataAccessException {
-        // TODO there is a problem with this find?? Title type and ps.setString are not compatible - possible error
         ArrayList<Invoice> invoices = new ArrayList<>();
         String SELECT_INVOICE = String.format("SELECT * " +
                 "FROM Invoice " +
@@ -103,6 +108,44 @@ public class InvoiceDB implements InvoiceIF {
             throw new DataAccessException("Error while selecting invoices", ex);
         }
         return invoices;
+    }
+    
+    public void updateVersionNo(int versionNo) throws DataAccessException {
+    	String UPDATE_VERSION = String.format("UPDATE TablesVersionNo SET VersionNo = %d WHERE TableName = '%s'", versionNo, "InvoiceTable");
+    	try {
+    		instance.executeUpdate(UPDATE_VERSION);
+    	} catch (DataAccessException e) {
+    		 throw new DataAccessException("Error while trying to update version number", e);
+		}
+    }
+    
+    public int getVersionNo() throws DataAccessException {
+    	String SELECT_VERSION = String.format("SELECT * FROM TablesVersionNo WHERE TableName = '%s'", "InvoiceTable");
+    	int versionNo = -1;
+    	
+    	try {
+    		ResultSet rs = instance.getConnection().createStatement().executeQuery(SELECT_VERSION);
+    		if (rs.next())
+    		    versionNo = rs.getInt("VersionNo");
+    	} catch (SQLException e) {
+   		 throw new DataAccessException("Error while trying to get version number", e);
+    	}
+    	
+    	return versionNo;
+    }
+
+    public boolean findEquals(Invoice invoice) throws DataAccessException {
+        ArrayList<Invoice> invoices = new ArrayList<>(findInvoiceByTitle(invoice.getTitle(), false));
+        boolean copyFound = false;
+
+        Iterator<Invoice> it = invoices.iterator();
+        while (it.hasNext() && !copyFound) {
+            Invoice current = it.next();
+            if (current.equals(invoice))
+                copyFound = true;
+        }
+
+        return copyFound;
     }
 
     public Invoice buildObject(ResultSet resultSet, boolean fullAssociation) throws DataAccessException {

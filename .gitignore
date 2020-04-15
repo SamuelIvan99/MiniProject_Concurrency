@@ -3,3 +3,6 @@ out/
 .vscode/
 main/
 MiniProject_Concurrency.iml
+.form
+.project
+.classpath

@@ -1,3 +1,8 @@
+/**
+ * @author samuel
+ */
+
+
 package db;
 
 import model.Invoice;
@@ -56,6 +61,17 @@ class InvoiceDBTest {
 
     @Test
     void findInvoiceByTitle() {
+        int expectedID = 2;
+        String searchTitle = "My roof is not working";
+
+        try {
+            // act
+            Invoice invoice = invoiceDb.findInvoiceByTitle(searchTitle, false).get(0);
+            // assert
+            assertEquals(expectedID, invoice.getInvoiceID());
+        } catch (DataAccessException e) {
+            fail("Error: find test failed.");
+        }
     }
 
     @Test

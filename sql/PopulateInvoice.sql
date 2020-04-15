@@ -14,4 +14,7 @@ VALUES
         I was visited by a representative of That Awful Company, Mr. Madman, at my home on that day.',
         '2019-05-23 01:59:23',
         'Repair the roof and pluck the holes.'
-    )
+    );
+
+INSERT INTO TablesVersionNo (TableName, VersionNo)
+VALUES ('InvoiceTable', 1);
