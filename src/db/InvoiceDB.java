@@ -121,12 +121,13 @@ public class InvoiceDB implements InvoiceIF {
     }
     
     public int getVersionNo() throws DataAccessException {
-    	String SELECT_VERSION = "SELECT * FROM TablesVersionNo WHERE TableName = 'InvoiceTable'";
+    	String SELECT_VERSION = String.format("SELECT * FROM TablesVersionNo WHERE TableName = '%s'", "InvoiceTable");
     	int versionNo = -1;
     	
     	try {
     		ResultSet rs = instance.getConnection().createStatement().executeQuery(SELECT_VERSION);
-    		versionNo = rs.getInt("VersionNo");
+    		if (rs.next())
+    		    versionNo = rs.getInt("VersionNo");
     	} catch (SQLException e) {
    		 throw new DataAccessException("Error while trying to get version number", e);
     	}
