@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.time.LocalDate;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -328,18 +329,88 @@ public class InvoiceMenu extends JFrame {
 	}
 	
 	private void createInvoice() {
-		// Invoice invoice = new Invoice();
-		// invoiceController.createInvoice(invoice);
-		
+		int currentVersionNo = -1;
+		try {
+			currentVersionNo = invoiceController.getVersion();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		if (tableVersion != currentVersionNo)
+			System.out.println("Please update the table first.");
+		else {
+			if (textFieldTitle.getText().isEmpty() || textFieldDescription.getText().isEmpty())
+				System.out.println("Please set title and description for the invoice.");
+			else {
+				Invoice invoice = new Invoice(textFieldTitle.getText(), textFieldDescription.getText(), textFieldSolution.getText());
+				boolean created = false;
+				try {
+					created = invoiceController.createInvoice(invoice);
+					if (created) {
+						invoiceController.updateVersionNo(++currentVersionNo);
+						initInvoiceTable();
+					}
+				} catch (Exception e){
+					System.out.println("Couldn't create invoice object.\n" + e.toString());
+				}
+			}
+		}
 	}
 
 	private void updateInvoice() {
-		// Invoice invoice = new Invoice();
-		// invoiceController.updateInvoice(invoiceToUpdate, newTitle, newDescription, newDate, newSolution, resolved);
-		
+		int currentVersionNo = -1;
+		try {
+			currentVersionNo = invoiceController.getVersion();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		if (tableVersion != currentVersionNo)
+			System.out.println("Please update the table first.");
+		else {
+			Invoice invoice = getSelectedInvoice();
+			if (invoice == null)
+				System.out.println("Please choose the invoice to update.");
+			else {
+				boolean updated = false;
+				try {
+					updated = invoiceController.updateInvoice(invoice, textFieldTitle.getText().isEmpty() ? invoice.getTitle() : textFieldTitle.getText(),
+							textFieldDescription.getText().isEmpty() ? invoice.getDescription() : textFieldDescription.getText(), LocalDate.now(),
+							textFieldSolution.getText(),false);
+					if (updated) {
+						invoiceController.updateVersionNo(++currentVersionNo);
+						initInvoiceTable();
+					}
+				} catch (Exception e){
+					System.out.println("Couldn't update invoice object.\n" + e.toString());
+				}
+			}
+		}
 	}
 
 	private void deleteInvoice() {
-		// invoiceController.deleteInvoice(id);
+		int currentVersionNo = -1;
+		try {
+			currentVersionNo = invoiceController.getVersion();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		if (tableVersion != currentVersionNo)
+			System.out.println("Please update the table first.");
+		else {
+			Invoice invoice = getSelectedInvoice();
+			if (invoice == null)
+				System.out.println("Please choose the invoice to delete.");
+			else {
+				boolean deleted = false;
+				try {
+					deleted = invoiceController.deleteInvoice(invoice.getInvoiceID());
+					if (deleted) {
+						invoiceController.updateVersionNo(++currentVersionNo);
+						initInvoiceTable();
+					}
+				} catch (Exception e){
+					System.out.println("Couldn't delete invoice object.\n" + e.toString());
+				}
+			}
+		}
 	}
 }

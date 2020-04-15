@@ -51,7 +51,6 @@ public class InvoiceDB implements InvoiceIF {
 
     @Override
     public List<Invoice> findInvoiceByTitle(String title, boolean fullAssociation) throws DataAccessException {
-        // TODO there is a problem with this find?? Title type and ps.setString are not compatible - possible error
         ArrayList<Invoice> invoices = new ArrayList<>();
         String SELECT_INVOICE = String.format("SELECT * " +
                 "FROM Invoice " +
