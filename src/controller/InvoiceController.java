@@ -11,7 +11,6 @@ import model.Invoice;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class InvoiceController {
@@ -56,6 +55,11 @@ public class InvoiceController {
         if (invoiceDB.findInvoiceByID(invoice.getInvoiceID(), false) != null) {
             throw new OperationException("Invoice with these attributes already exists in the database.");
         }
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         if (!newTitle.isBlank())
             invoiceToUpdate.setTitle(newTitle);
@@ -65,6 +69,11 @@ public class InvoiceController {
             invoiceToUpdate.setSolution(newSolution);
         if (newDate != null)
             invoiceToUpdate.setDate(newDate);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         invoiceToUpdate.setResolved(resolved);
         return invoiceDB.updateInvoice(invoiceToUpdate);

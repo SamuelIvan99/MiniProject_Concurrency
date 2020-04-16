@@ -11,16 +11,12 @@ public class RefreshNotifier {
 
     public synchronized void awaitRefresh() {
         try {
-            System.out.println("Waiting for update");
             while (!wantsToRefresh) {
+                System.out.println("Waiting for update ...");
                 wait();
 
                 System.out.println("Another thread signaled refresh, updating the database");
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+
                 table.update();
                 wantsToRefresh = false;
                 System.out.println("Table updated");
