@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 import controller.InvoiceController;
 import model.Invoice;
 
-public class InvoiceMenu extends JFrame {
+public class InvoiceMenu extends JFrame implements Updatable{
 
 	/**
 	 * 
@@ -71,7 +71,7 @@ public class InvoiceMenu extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -249,7 +249,8 @@ public class InvoiceMenu extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				initInvoiceTable();
+//				initInvoiceTable();
+				StartUp.getRefreshNotifier().signalRefresh(InvoiceMenu.this);
 			}
 		});
 		btnRefresh.setFont(new Font("Ubuntu", Font.PLAIN, 12));
@@ -262,7 +263,17 @@ public class InvoiceMenu extends JFrame {
 		
 		contentPane.add(panel);
 	}
-	
+
+	public void update () {
+		System.out.println("Table .update method");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		initInvoiceTable();
+	}
+
 	private void initInvoiceTable() {
 		clearInvoiceTable();
 		try {
