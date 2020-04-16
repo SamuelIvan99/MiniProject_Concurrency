@@ -266,11 +266,6 @@ public class InvoiceMenu extends JFrame implements Updatable{
 
 	public void update () {
 		System.out.println("Table .update method");
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		initInvoiceTable();
 	}
 

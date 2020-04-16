@@ -14,14 +14,20 @@ public class RefreshNotifier {
             System.out.println("Waiting for update");
             while (!wantsToRefresh) {
                 wait();
+
+                System.out.println("Another thread signaled refresh, updating the database");
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                table.update();
+                wantsToRefresh = false;
+                System.out.println("Table updated");
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        System.out.println("Another thread signaled refresh, updating the database");
-        table.update();
-        System.out.println("Table updated");
     }
 
     public synchronized void signalRefresh(Updatable updatable) {
