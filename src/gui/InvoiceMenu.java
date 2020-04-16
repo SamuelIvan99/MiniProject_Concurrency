@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,6 +29,7 @@ public class InvoiceMenu extends JFrame implements Updatable {
      */
     private static int tableVersion = 0;
     private static final long serialVersionUID = 1L;
+
     private JPanel contentPane;
     private JTable invoicesTable;
     private JLabel lblVersionNo;
@@ -223,7 +223,6 @@ public class InvoiceMenu extends JFrame implements Updatable {
         });
         btnUpdate.setFont(new Font("Ubuntu", Font.PLAIN, 12));
         panel.add(btnUpdate);
-
 
         btnDelete = new JButton("Delete");
         btnDelete.setBounds(595, 95, 75, 25);

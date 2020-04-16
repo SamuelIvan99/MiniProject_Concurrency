@@ -33,10 +33,9 @@ public class InvoiceController {
     }
 
     public boolean createInvoice(Invoice invoice) throws DataAccessException {
-        if(invoiceDB.findEquals(invoice))
+        if (invoiceDB.findEquals(invoice))
             throw new OperationException("Invoice with these attributes already exists.");
-        
-        
+
         return invoiceDB.insertInvoice(invoice);
     }
 
@@ -55,6 +54,8 @@ public class InvoiceController {
         if (invoiceDB.findInvoiceByID(invoice.getInvoiceID(), false) != null) {
             throw new OperationException("Invoice with these attributes already exists in the database.");
         }
+
+        // simulating long update
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -69,6 +70,8 @@ public class InvoiceController {
             invoiceToUpdate.setSolution(newSolution);
         if (newDate != null)
             invoiceToUpdate.setDate(newDate);
+
+        // simulating long update
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -79,7 +82,7 @@ public class InvoiceController {
         return invoiceDB.updateInvoice(invoiceToUpdate);
     }
 
-    public boolean deleteInvoice (int id) throws DataAccessException {
+    public boolean deleteInvoice(int id) throws DataAccessException {
         return invoiceDB.deleteInvoice(id);
     }
 
@@ -92,21 +95,21 @@ public class InvoiceController {
             return new ArrayList<>(invoiceList);
         }
     }
-    
+
     public void updateVersionNo(int newVersion) throws DataAccessException {
-    	invoiceDB.updateVersionNo(newVersion);
+        invoiceDB.updateVersionNo(newVersion);
     }
-    
+
     public int getVersion() throws DataAccessException {
         return currentVersion;
-    	//return invoiceDB.getVersionNo();
-	}
-    
+        //return invoiceDB.getVersionNo();
+    }
+
     public static boolean isUpToDate(int version) throws DataAccessException {
         int versionNo = invoiceDB.getVersionNo();
         boolean upToDate = true;
         if (versionNo == -1) {
-            System.out.println("Couldn't connect to the database, using local version");
+            System.out.println("Couldn't connect to the database, using local version.");
         } else if (versionNo != version) {
             upToDate = false;
         }
@@ -117,5 +120,4 @@ public class InvoiceController {
     public static int getCurrentVersion() {
         return currentVersion;
     }
-
 }
