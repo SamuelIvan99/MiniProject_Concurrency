@@ -24,6 +24,7 @@ import model.Invoice;
 
 public class InvoiceMenu extends JFrame implements Updatable {
 
+    InvoiceMenu frame;
     /**
      *
      */
@@ -72,11 +73,11 @@ public class InvoiceMenu extends JFrame implements Updatable {
     /**
      * Launch the application.
      */
-    public static void start() {
+    public void start() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    InvoiceMenu frame = new InvoiceMenu();
+                    frame = new InvoiceMenu();
                     frame.setTitle("Invoice Menu");
                     frame.setVisible(true);
                 } catch (Exception e) {
@@ -84,6 +85,10 @@ public class InvoiceMenu extends JFrame implements Updatable {
                 }
             }
         });
+    }
+
+    public InvoiceMenu getFrame() {
+        return frame;
     }
 
     /**

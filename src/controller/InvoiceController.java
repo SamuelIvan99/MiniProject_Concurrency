@@ -15,10 +15,10 @@ import java.util.List;
 
 public class InvoiceController {
 
-    private InvoiceIF invoiceDB;
+    private static InvoiceIF invoiceDB;
 
-    private List<Invoice> invoiceList;
-    private int currentVersion;
+    private static List<Invoice> invoiceList;
+    private static int currentVersion;
 
     public InvoiceController() {
         invoiceDB = new InvoiceDB();
@@ -87,7 +87,9 @@ public class InvoiceController {
         if (isUpToDate(currentVersion)) {
             return new ArrayList<>(invoiceList);
         } else {
-            return new ArrayList<>(invoiceDB.getAllInvoices(fullAssociation));
+            invoiceList = invoiceDB.getAllInvoices(fullAssociation);
+            currentVersion = invoiceDB.getVersionNo();
+            return new ArrayList<>(invoiceList);
         }
     }
     
@@ -100,7 +102,7 @@ public class InvoiceController {
     	//return invoiceDB.getVersionNo();
 	}
     
-    public boolean isUpToDate(int version) throws DataAccessException {
+    public static boolean isUpToDate(int version) throws DataAccessException {
         int versionNo = invoiceDB.getVersionNo();
         boolean upToDate = true;
         if (versionNo == -1) {
@@ -111,4 +113,9 @@ public class InvoiceController {
 
         return upToDate;
     }
+
+    public static int getCurrentVersion() {
+        return currentVersion;
+    }
+
 }
