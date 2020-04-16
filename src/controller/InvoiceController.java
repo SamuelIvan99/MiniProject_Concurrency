@@ -18,8 +18,19 @@ public class InvoiceController {
 
     private InvoiceIF invoiceDB;
 
+    private List<Invoice> invoiceList;
+    private int currentVersion;
+
     public InvoiceController() {
         invoiceDB = new InvoiceDB();
+
+        try {
+            currentVersion = invoiceDB.getVersionNo();
+            invoiceList = invoiceDB.getAllInvoices(true);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+            System.out.println("Couldn't initialize invoices");
+        }
     }
 
     public boolean createInvoice(Invoice invoice) throws DataAccessException {
@@ -64,7 +75,11 @@ public class InvoiceController {
     }
 
     public List<Invoice> getAllInvoices(boolean fullAssociation) throws DataAccessException {
-        return new ArrayList<>(invoiceDB.getAllInvoices(fullAssociation));
+        if (isUpToDate(currentVersion)) {
+            return new ArrayList<>(invoiceList);
+        } else {
+            return new ArrayList<>(invoiceDB.getAllInvoices(fullAssociation));
+        }
     }
     
     public void updateVersionNo(int newVersion) throws DataAccessException {
@@ -72,10 +87,19 @@ public class InvoiceController {
     }
     
     public int getVersion() throws DataAccessException {
-    	return invoiceDB.getVersionNo();
+        return currentVersion;
+    	//return invoiceDB.getVersionNo();
 	}
     
     public boolean isUpToDate(int version) throws DataAccessException {
-    	return invoiceDB.getVersionNo() == version;
+        int versionNo = invoiceDB.getVersionNo();
+        boolean upToDate = true;
+        if (versionNo == -1) {
+            System.out.println("Couldn't connect to the database, using local version");
+        } else if (versionNo != version) {
+            upToDate = false;
+        }
+
+        return upToDate;
     }
 }
