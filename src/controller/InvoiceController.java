@@ -57,7 +57,8 @@ public class InvoiceController {
 
         // simulating long update
         try {
-            Thread.sleep(2000);
+            int x = (int) (Math.random() * 10000);
+            Thread.sleep(x);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -73,7 +74,9 @@ public class InvoiceController {
 
         // simulating long update
         try {
-            Thread.sleep(2000);
+            int x = (int) (Math.random() * 10000);
+            Thread.sleep(x);
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -108,6 +111,7 @@ public class InvoiceController {
     public static boolean isUpToDate(int version) throws DataAccessException {
         int versionNo = invoiceDB.getVersionNo();
         boolean upToDate = true;
+
         if (versionNo == -1) {
             System.out.println("Couldn't connect to the database, using local version.");
         } else if (versionNo != version) {
