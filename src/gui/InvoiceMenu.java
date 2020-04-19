@@ -248,7 +248,6 @@ public class InvoiceMenu extends JFrame implements Updatable, Modifiable {
 
     public void btnClearActionPerformed(ActionEvent e) {
         clearInputFields();
-
     }
 
     public void btnRefreshActionPerformed(ActionEvent e) {
