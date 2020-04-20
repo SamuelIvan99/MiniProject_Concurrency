@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * @author dragon
+ * outdated version not being currently used
  */
 public class InvoiceGui extends JFrame {
 

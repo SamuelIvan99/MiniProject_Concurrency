@@ -1,8 +1,3 @@
-/**
- * @author samuel
- */
-
-
 package model;
 
 import java.time.LocalDate;

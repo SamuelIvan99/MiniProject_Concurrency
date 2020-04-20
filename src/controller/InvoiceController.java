@@ -1,7 +1,3 @@
-/**
- * @author samuel
- */
-
 package controller;
 
 import db.DataAccessException;
