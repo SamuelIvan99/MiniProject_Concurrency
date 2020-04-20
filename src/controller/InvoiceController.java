@@ -52,12 +52,12 @@ public class InvoiceController {
         }
 
         // simulating long update
-        try {
-            int x = (int) (Math.random() * 10000);
-            Thread.sleep(x);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            int x = (int) (Math.random() * 10000);
+//            Thread.sleep(x);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
         if (!newTitle.isBlank())
             invoiceToUpdate.setTitle(newTitle);
@@ -69,13 +69,13 @@ public class InvoiceController {
             invoiceToUpdate.setDate(newDate);
 
         // simulating long update
-        try {
-            int x = (int) (Math.random() * 10000);
-            Thread.sleep(x);
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            int x = (int) (Math.random() * 10000);
+//            Thread.sleep(x);
+//
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
         invoiceToUpdate.setResolved(resolved);
         return invoiceDB.updateInvoice(invoiceToUpdate);
@@ -95,7 +95,7 @@ public class InvoiceController {
         }
     }
 
-    public void updateVersionNo(int newVersion) throws DataAccessException {
+    private void updateVersionNo(int newVersion) throws DataAccessException {
         invoiceDB.updateVersionNo(newVersion);
     }
 
@@ -120,4 +120,5 @@ public class InvoiceController {
     public static int getCurrentVersion() {
         return currentVersion;
     }
+
 }

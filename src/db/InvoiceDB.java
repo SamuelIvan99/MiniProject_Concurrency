@@ -19,11 +19,29 @@ public class InvoiceDB implements InvoiceIF {
 
     @Override
     public boolean insertInvoice(Invoice invoice) throws DataAccessException {
-        String INSERT_INVOICE = String.format("INSERT INTO Invoice (Title, Description, Solution) "
-                        + "VALUES ('%s', '%s', '%s')",
-                invoice.getTitle(), invoice.getDescription(), invoice.getSolution());
-        int ID = instance.executeInsertWithIdentity(INSERT_INVOICE);
-        invoice.setInvoiceID(ID);
+
+        int ID = -1;
+
+        try {
+            instance.startTransaction();
+
+            String INSERT_INVOICE = String.format("INSERT INTO Invoice (Title, Description, Solution) "
+                            + "VALUES ('%s', '%s', '%s')",
+                    invoice.getTitle(), invoice.getDescription(), invoice.getSolution());
+            ID = instance.executeInsertWithIdentity(INSERT_INVOICE);
+            invoice.setInvoiceID(ID);
+
+            updateVersionNo(getVersionNo() + 1);
+
+            instance.commitTransaction();
+        } catch (SQLException e) {
+            try {
+                instance.rollbackTransaction();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        }
 
         return findInvoiceByID(ID, false) != null;
     }
@@ -65,13 +83,27 @@ public class InvoiceDB implements InvoiceIF {
 
     @Override
     public boolean updateInvoice(Invoice invoice) throws DataAccessException {
-        String UPDATE_INVOICE = String.format("UPDATE Invoice "
-                        + "SET Title = '%s', Description = '%s', Solution = '%s' "
-                        + "WHERE InvoiceID = %d",
-                invoice.getTitle(), invoice.getDescription(),
-                invoice.getSolution(), invoice.getInvoiceID());
+        int rowsChanged = -1;
+        try {
+            instance.startTransaction();
+            String UPDATE_INVOICE = String.format("UPDATE Invoice "
+                            + "SET Title = '%s', Description = '%s', Solution = '%s' "
+                            + "WHERE InvoiceID = %d",
+                    invoice.getTitle(), invoice.getDescription(),
+                    invoice.getSolution(), invoice.getInvoiceID());
 
-        int rowsChanged = instance.executeUpdate(UPDATE_INVOICE);
+            rowsChanged = instance.executeUpdate(UPDATE_INVOICE);
+
+            updateVersionNo(getVersionNo() + 1);
+            instance.commitTransaction();
+        } catch (SQLException e) {
+            try {
+                instance.rollbackTransaction();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        }
         return rowsChanged > 0;
     }
 
@@ -82,8 +114,16 @@ public class InvoiceDB implements InvoiceIF {
         int rowsChanged;
 
         try {
+            instance.startTransaction();
             rowsChanged = instance.executeUpdate(DELETE_INVOICE);
-        } catch (DataAccessException ex) {
+            updateVersionNo(getVersionNo() + 1);
+            instance.commitTransaction();
+        } catch (DataAccessException | SQLException ex) {
+            try {
+                instance.rollbackTransaction();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             throw new DataAccessException("Error while trying to delete an invoice with ID = " + id, ex);
         }
 

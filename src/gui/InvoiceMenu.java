@@ -360,7 +360,7 @@ public class InvoiceMenu extends JFrame implements Updatable, Modifiable {
 
                     boolean created = invoiceController.createInvoice(invoice);
                     if (created) {
-                        invoiceController.updateVersionNo(currVersion + 1);
+                        //invoiceController.updateVersionNo(currVersion + 1);
                         initInvoiceTable();
                     }
                 }
@@ -411,7 +411,7 @@ public class InvoiceMenu extends JFrame implements Updatable, Modifiable {
                             textFieldDescription.getText().isEmpty() ? invoice.getDescription() : textFieldDescription.getText(), LocalDate.now(),
                             textFieldSolution.getText(), false);
                     if (updated) {
-                        invoiceController.updateVersionNo(currVersion + 1);
+                        //invoiceController.updateVersionNo(currVersion + 1);
                         initInvoiceTable();
                     }
                 }
@@ -432,7 +432,7 @@ public class InvoiceMenu extends JFrame implements Updatable, Modifiable {
                 if (invoice != null) {
                     boolean deleted = invoiceController.deleteInvoice(invoice.getInvoiceID());
                     if (deleted) {
-                        invoiceController.updateVersionNo(currVersion + 1);
+                        //invoiceController.updateVersionNo(currVersion + 1);
                         initInvoiceTable();
                     }
                 }
